@@ -1,0 +1,11 @@
+.tab:nth-of-type(1) {
+  @apply rounded-tl-2xl;
+}
+
+.tab:nth-of-type(2) {
+  @apply rounded-tr-none;
+}
+
+.tab:nth-of-type(3) {
+  @apply rounded-tr-2xl;
+}
