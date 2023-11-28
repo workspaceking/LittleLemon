@@ -1,6 +1,6 @@
 import { Dish, Testimonial } from '@components/index';
 import { Arrow, Badge } from '@elements/index';
-import { base64Data } from '@data/index';
+import { foodBase64 } from '@data/index';
 import { Layout } from '@app/layouts';
 import { HomeHero } from '@app/components/pages';
 
@@ -18,10 +18,10 @@ export const Home = (props) => {
           <div className="flex flex-col justify-start items-center gap-6">
             <div className="flex justify-between items-center self-stretch ">
               <div className="flex justify-center items-center  gap-3">
-                {Object.keys(base64Data).map((v, i) => (
+                {Object.keys(foodBase64).map((v, i) => (
                   <Badge
                     key={i}
-                    imageBase64={base64Data[v]}
+                    imageBase64={foodBase64[v]}
                     label={v.toLocaleUpperCase()}
                   />
                 ))}

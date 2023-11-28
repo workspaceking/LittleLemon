@@ -89,6 +89,7 @@ InputCard.propTypes = {
 };
 
 export const SelectCard = ({
+  name,
   label,
   options = [],
   onSelect,
@@ -147,6 +148,7 @@ export const SelectCard = ({
 };
 
 SelectCard.propTypes = {
+  name: PropTypes.string,
   label: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({

@@ -2,7 +2,7 @@ export const navigation_links = [
   { title: 'Home', to: '/' },
   { title: 'Menu', to: '/findfood' },
   { title: 'Bookings', to: '/bookings' },
-  { title: 'Reserve a Table', to: '/bookingForm' },
+  { title: 'Book A Table', to: '/bookingForm' },
   { title: 'About', to: '/about' },
   { title: 'Login', to: '/login' },
 ];

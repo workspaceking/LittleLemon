@@ -1,5 +1,7 @@
 // Resource: https://raw.githubusercontent.com/Meta-Front-End-Developer-PC/capstone/master/api.js
 
+import { LocalStorage } from '@app/store';
+
 const seededRandom = function (seed) {
   var m = 2 ** 35 - 31;
   var a = 185852;
@@ -11,7 +13,7 @@ const seededRandom = function (seed) {
 
 const fetchAPI = function (date) {
   let result = [];
-  let random = seededRandom(date.getDate());
+  let random = seededRandom(date);
 
   for (let i = 17; i <= 23; i++) {
     if (random() < 0.5) {

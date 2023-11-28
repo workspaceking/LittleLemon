@@ -12,13 +12,14 @@ import { CardContainer } from './card/CardContainer';
 import { InputCard, SelectCard } from './form/Inputs';
 import { FindFoodHero } from './pages/home/FindFoodHero';
 import { Tabs } from './navigation/Tabs';
-import { CartItem } from './food/CartItem';
+import { CartItem, OrderItem } from './food/CartItem';
 
 export {
   Navigation,
   CartButton,
   Hamburger,
   CartItem,
+  OrderItem,
   Dish,
   Star,
   Testimonial,

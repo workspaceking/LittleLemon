@@ -1,5 +1,5 @@
 import React from 'react';
-import { base64Data } from '@data/index';
+import { foodBase64 } from '@data/index';
 import { Badge } from '@elements/index';
 
 export const FindFoodHero = (props) => {
@@ -12,10 +12,10 @@ export const FindFoodHero = (props) => {
         <input className="h-4xl w-full rounded-md px-lg bg-surface border-2 border-primary" />
       </div>
       <div className="justify-center items-center gap-xl flex">
-        {Object.keys(base64Data).map((v, i) => (
+        {Object.keys(foodBase64).map((v, i) => (
           <Badge
             key={i}
-            imageBase64={base64Data[v]}
+            imageBase64={foodBase64[v]}
             label={v.toLocaleUpperCase()}
           />
         ))}

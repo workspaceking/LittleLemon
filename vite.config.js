@@ -18,6 +18,7 @@ export default defineConfig({
       '@assets': resolve(__dirname, 'src/assets'),
       '@elements': resolve(__dirname, 'src/elements'),
       '@helpers': resolve(__dirname, 'src/helpers'),
+      '@store': resolve(__dirname, 'src/store'),
     },
   },
   test: {

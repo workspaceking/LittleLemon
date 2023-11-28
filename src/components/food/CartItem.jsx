@@ -26,9 +26,27 @@ export const CartItem = ({ image, title, quantity, price }) => {
   );
 };
 
+export const OrderItem = ({ image, title, price, quantity }) => {
+  return (
+    <div className="flex justify-between items-center w-full relative p-3 rounded-2xl bg-gray">
+      <img
+        src={image || 'https://fakeimg.pl/144x128/cade4c/1c66c7'}
+        className="w-[140px] h-32 rounded-[14px] object-cover"
+      />
+      <p className="w-[225px] text-[21px] text-left text-primary">{title}</p>
+      <div className="flex justify-start items-start relative">
+        <p className="text-xl text-left text-pink">$</p>
+        <p className="text-lg text-left text-pink">{price * quantity}</p>
+      </div>
+      <img src={base64Data.bin} className={'w-2xl cursor-pointer'} />
+    </div>
+  );
+};
+
 CartItem.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string.isRequired,
   quantity: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
 };
+OrderItem.propTypes = CartItem.propTypes;

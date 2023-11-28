@@ -1,5 +1,6 @@
 import React from 'react';
 import { FindFoodHero } from './FindFoodHero';
+import { Link } from 'react-router-dom';
 
 export function HomeHero() {
   return (
@@ -23,9 +24,12 @@ export function HomeHero() {
         aria-details={'Background Image'}
         className="w-xs_vw h-[436px] bg-[url(https://via.placeholder.com/375x438)] flex justify-center items-end  rounded-2xl border-4 border-secondary"
       >
-        <button className=" px-6 mb-4xl  py-2 w-fit h-fit bg-surface rounded-3xl text-primary text-lg font-medium font-['Karla']">
+        <Link
+          to={'/bookingForm'}
+          className=" px-6 mb-4xl  py-2 w-fit h-fit bg-surface rounded-3xl text-primary text-lg font-medium font-['Karla']"
+        >
           Reserve a Table
-        </button>
+        </Link>
       </section>
     </>
   );
