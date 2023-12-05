@@ -30,7 +30,7 @@ function Bookings() {
 
   return (
     <Layout childAsHero={true}>
-      <section className="vstack justify-start items-center min-w-[375px] w-full max-w-[975px] p-3 rounded-2xl bg-gray border-[10px] border-gray">
+      <section className="vstack justify-start items-center min-w-[325px] w-full max-w-[975px] p-3 rounded-2xl bg-gray border-[10px] border-gray">
         <h1 className="text-3xl font-bold text-left  my-3 capitalize text-dark">
           Cart & Bookings
         </h1>

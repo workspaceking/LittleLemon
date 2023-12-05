@@ -47,7 +47,7 @@ export const Home = (props) => {
           ref={recipesRef}
           data-testid="_top_recipes"
           aria-labelledby={'recipes-heading'}
-          className="vstack justify-start items-start min-w-[375px] sectionContainer relative  gap-6 p-6 rounded-2xl border-4 border-gray"
+          className="vstack justify-start items-start min-w-[325px] sectionContainer relative  gap-6 p-6 rounded-2xl border-4 border-gray"
         >
           <h2
             id={'recipes-heading'}

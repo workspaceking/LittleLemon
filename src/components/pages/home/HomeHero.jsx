@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export function HomeHero() {
   return (
     <section
-      className={'vstack items-center  gap-2xl  px-6 w-full rounded-lg  p-6'}
+      className={'vstack items-center  gap-2xl  w-full rounded-lg  xs:p-6'}
     >
       <div className="vstack justify-start items-center hstack gap-sm">
         <h1 className="text-secondary leading-normal text-title font-medium font-['Markazi Text']">

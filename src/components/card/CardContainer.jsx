@@ -4,7 +4,7 @@ import React from 'react';
 export const CardContainer = ({ title, padding = '2xl', ...props }) => {
   return (
     <div
-      className={`min-w-[375px] h-full vstack w-full justify-center items-center  relative gap-lg p-${padding} rounded-xl bg-surface`}
+      className={`min-w-[325px] h-full vstack w-full justify-center items-center  relative gap-lg p-${padding} rounded-xl bg-surface`}
     >
       {title && (
         <h2

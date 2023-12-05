@@ -17,10 +17,10 @@ export const Dish = ({ image, ratings, data }) => {
           backgroundSize: 'cover',
         }}
         className={
-          'rounded-md w-full h-[216px] p-1.5 hstack justify-center items-end relative'
+          'rounded-md w-full h-[216px] p-1.5  vstack justify-end items-center relative'
         }
       >
-        <div className="hstack h-fit w-fit justify-start gap-3 items-center  bg-surface rounded-lg px-3">
+        <div className="hstack h-fit justify-start w-fit sm:w-full gap-3 items-center  bg-surface rounded-lg px-3">
           <div className="hstack justify-start items-start max-w-max w-max relative gap-[3px] group">
             {Array(Math.round(ratings))
               .fill(1, 0, 5)

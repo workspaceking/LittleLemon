@@ -45,7 +45,9 @@ export default function FindFood() {
 
   return (
     <Layout Hero={FindFoodHero}>
-      <Container bordered={false}>
+      <div
+        className={`flex flex-col lg:flex-row gap-6 lg:justify-between items-start sectionContainer  py-6 rounded-2xl`}
+      >
         <div className="vstack justify-start items-start w-full  lg:w-[325px] relative gap-9 p-6 rounded-3xl bg-gray">
           <h2 className="text-3xl font-bold text-left capitalize text-dark">
             Filters
@@ -128,7 +130,7 @@ export default function FindFood() {
           {dishes.length === 0 || data.request.food ? (
             <DishShimmer />
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            <div className="grid sm:grid-cols-2 gap-6 md:grid-cols-3 xl:grid-cols-4 ">
               {dishes.map(({ title, image, excerpt, ratings, price }, i) => (
                 <Dish
                   key={i}
@@ -145,7 +147,7 @@ export default function FindFood() {
             </div>
           )}
         </div>
-      </Container>
+      </div>
       <Alert />
     </Layout>
   );

@@ -18,13 +18,13 @@ export const Tabs = ({ children, tabs = [], onTabChange }) => {
               active ? 'bg-gray' : 'bg-primary'
             }`}
           >
-            <p
-              className={`text-xl text-center ${
+            <span
+              className={`text-[14px] md:text-lg text-center ${
                 active ? 'text-dark' : 'text-surface'
               }`}
             >
               {label}
-            </p>
+            </span>
             {icon && (
               <div
                 className={`hstack justify-start items-center relative gap-3 p-1.5 rounded-lg ${

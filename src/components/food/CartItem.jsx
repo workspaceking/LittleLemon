@@ -8,14 +8,14 @@ export const CartItem = ({ image, title, quantity, price }) => {
   return (
     <article
       role={'article'}
-      className="hstack justify-between items-center w-full relative p-3 rounded-2xl bg-gray"
+      className="flex flex-col bg-surface md:bg-gray  md:flex-row gap-6 lg:justify-between items-center w-full relative p-3 rounded-2xl "
     >
       <img
         alt={'cart item image'}
         src={image || 'https://fakeimg.pl/144x128/cade4c/1c66c7'}
         className="w-[140px] h-32 rounded-[14px] object-cover"
       />
-      <p className="w-[225px] text-[21px] text-left text-primary">{title}</p>
+      <p className="w-fit text-[21px] text-left text-primary">{title}</p>
       <div className="hstack justify-start items-center gap-16">
         <div className="w-[125px] hstack justify-center items-center   relative gap-3 rounded-md overflow-hidden bg-surface">
           <button
@@ -71,7 +71,7 @@ export const OrderItem = ({ image, title, price, quantity }) => {
   return (
     <article
       role={'article'}
-      className="hstack justify-between items-center w-full relative p-3 rounded-2xl bg-gray"
+      className="flex flex-col bg-surface md:bg-gray  md:flex-row gap-6 lg:justify-between items-center w-full relative p-3 rounded-2xl "
     >
       <img
         alt={'order item'}

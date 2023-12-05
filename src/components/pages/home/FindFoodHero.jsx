@@ -7,7 +7,7 @@ import { DataContext } from '@app/store';
 export const FindFoodHero = (props) => {
   const { actions, data } = useContext(DataContext);
   return (
-    <form className="p-6  rounded-xl vstack justify-center items-center gap-6 hstack bg-surface mx-auto w-full max-w-3xl min-w-[325px]">
+    <form className="p-6  rounded-xl vstack justify-center items-center gap-6 hstack bg-surface mx-auto w-full max-w-3xl xs:min-w-[325px]">
       <label
         htmlFor={'foodquery'}
         className="text-base font-medium text-left capitalize text-black"

@@ -2,7 +2,7 @@
   @apply outline-secondary outline-2;
 }
 .sectionContainer {
-  @apply w-full max-w-[1296px];
+  @apply w-full max-w-[1296px] mx-auto;
 }
 
 .hstack {

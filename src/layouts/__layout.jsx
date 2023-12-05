@@ -13,7 +13,7 @@ export const Layout = ({ Hero, childAsHero = false, ...props }) => {
         <Navigation />
         <div
           data-testid="_hero"
-          className="sectionContainer gap-2xl  justify-center items-center hstack flex-1"
+          className="w-full gap-2xl  justify-center items-center hstack flex-1"
         >
           {childAsHero ? props.children : <Hero />}
         </div>

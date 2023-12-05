@@ -22,7 +22,7 @@ export const Testimonial = ({ large = false }) => {
           className={`${large ? 'w-44' : 'w-12'}`}
           src="./assets/images/user.png"
         />
-        <div className="vstack justify-center items-center w-fit  relative gap-1.5">
+        <div className="flex flex-col justify-center items-center w-fit  relative gap-1.5">
           <p
             className={`leading-tightfont-bold text-center w-full text-dark ${
               large ? 'text-3xl' : 'text-xs'
@@ -40,7 +40,7 @@ export const Testimonial = ({ large = false }) => {
         </div>
       </div>
       <div
-        className={`vstack justify-start items-center ${
+        className={`flex flex-col justify-center items-center ${
           large ? 'w-full' : 'w-full max-w-[225px]'
         }  relative gap-6`}
       >
