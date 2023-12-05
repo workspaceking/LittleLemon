@@ -1,19 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Nav = ({ title, items = [] }) => {
   return (
-    <div className="flex flex-col justify-start items-start relative gap-2xl p-6 rounded-3xl">
+    <div className="vstack justify-start items-start relative gap-2xl p-6 rounded-3xl">
       <p className="text-base font-bold text-left text-primary">{title}</p>
-      <div className="flex flex-col justify-start items-start  relative gap-sm">
+      <div className="vstack justify-start items-start  relative gap-sm">
         {items.map(({ title, to }, i) => (
-          <a
+          <Link
             key={i}
-            href={to}
+            to={to}
             className="text-base font-medium text-left text-dark"
           >
             {title}
-          </a>
+          </Link>
         ))}
       </div>
     </div>

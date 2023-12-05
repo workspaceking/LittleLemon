@@ -9,6 +9,15 @@ import { fetchAPI } from './api';
 import { DataProvider, LocalStorage } from './store';
 import userEvent from '@testing-library/user-event';
 import { Home } from './pages';
+import {
+  REMOVE_FROM_CART,
+  UPDATE_CART,
+  UPDATE_CART_ITEM_QTY,
+  dataReducer,
+} from './store/Context';
+import { storage } from './data';
+
+// Re
 // setup function
 function setup(jsx) {
   return {
@@ -25,6 +34,14 @@ afterEach(() => {
   cleanup();
 });
 beforeEach(() => {
+  // IntersectionObserver isn't available in test environment
+  const mockIntersectionObserver = vi.fn();
+  mockIntersectionObserver.mockReturnValue({
+    observe: () => null,
+    unobserve: () => null,
+    disconnect: () => null,
+  });
+  window.IntersectionObserver = mockIntersectionObserver;
   render(<App />);
 });
 describe('App Rendering', () => {
@@ -46,7 +63,6 @@ describe('Booking Form', () => {
       <DataProvider>
         <BrowserRouter>
           <Routes>
-            <Route path={'/'} element={<Home />} />
             <Route
               path={'/bookingForm'}
               element={<BookingForm onSubmit={mockSubmit} />}
@@ -59,7 +75,7 @@ describe('Booking Form', () => {
     const bookingFormLink = screen.getAllByText(/Book A Table/i)[0];
     fireEvent.click(bookingFormLink);
     // Trigger form submission
-    const button = screen.getByRole('button');
+    const button = screen.getByTestId('bookingFormBtn');
     fireEvent.click(button);
 
     // Check if the form submission function was called
@@ -83,3 +99,83 @@ describe('local storage Test', () => {
     expect(count).toEqual(10);
   });
 });
+
+// Test initial state
+it('initializes state with expected values', () => {
+  const { cart, orders, bookings, dishes, auth } = storage;
+  const new_state = {
+    cart,
+    orders,
+    bookings,
+    times: fetchAPI(new Date()),
+    request: {
+      food: false,
+    },
+    notification: {
+      show: false,
+      title: '',
+      text: '',
+    },
+    auth,
+  };
+  const initialState = dataReducer(
+    {
+      cart: [],
+      orders: [],
+      bookings: [],
+      request: { food: false },
+      notification: { show: false, title: '', text: '' },
+      auth: { authenticated: false, phoneNumber: '' },
+    },
+    { type: '@@INIT' },
+  );
+  const { times, ...rest } = initialState;
+  const { times: t, ...new_rest } = new_state;
+
+  expect(JSON.stringify(rest)).toEqual(JSON.stringify(new_rest));
+});
+
+// Test UPDATE_CART action
+it('updates cart with new item', () => {
+  const item = { name: 'Pizza', quantity: 1 };
+  const initialState = { cart: [] };
+  const updatedState = dataReducer(initialState, {
+    type: UPDATE_CART,
+    payload: item,
+  });
+
+  expect(updatedState.cart).toEqual([item]);
+});
+
+// Test UPDATE_CART_ITEM_QTY action
+it('updates quantity of existing cart item', () => {
+  const items = [{ name: 'Pizza', quantity: 1 }];
+  const initialState = { cart: items };
+  const update = { name: 'Pizza', quantity: 2 };
+  const updatedState = dataReducer(initialState, {
+    type: UPDATE_CART_ITEM_QTY,
+    payload: update,
+  });
+
+  expect(updatedState.cart).toEqual([{ name: 'Pizza', quantity: 2 }]);
+});
+
+// Test REMOVE_FROM_CART action
+it('removes item from cart by name', () => {
+  const items = [{ name: 'Pizza' }, { name: 'Burger' }];
+  const initialState = { cart: items };
+  const itemName = 'Pizza';
+  const updatedState = dataReducer(initialState, {
+    type: REMOVE_FROM_CART,
+    payload: itemName,
+  });
+
+  expect(updatedState.cart).toEqual([{ name: 'Burger' }]);
+});
+
+// Did you add unit tests for the form input validation?
+// Did you add unit tests for the form submission validation?
+// Did you improve the accessibility of your app by improving the semantic markup you’re using?
+// Did you use ARIA attributes?
+// Did you label the forms?
+// https://www.coursera.org/learn/meta-front-end-developer-capstone/supplement/AhXjx/recap-ux-and-ui-usability-evaluation

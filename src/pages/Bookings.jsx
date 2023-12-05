@@ -1,7 +1,13 @@
-import { CartItem, OrderItem, Tabs } from '@app/components';
+import {
+  CardContainer,
+  CartItem,
+  InputCard,
+  OrderItem,
+  Tabs,
+} from '@app/components';
 import { base64Data } from '@app/data';
 import { Layout } from '@app/layouts';
-import { DataContext } from '@app/store';
+import { DataContext, LocalStorage } from '@app/store';
 import React, { useContext, useEffect, useState } from 'react';
 
 function Bookings() {
@@ -9,13 +15,25 @@ function Bookings() {
 
   const { actions, data } = useContext(DataContext);
 
+  const subtotal = +data.cart
+    .reduce((acc, item) => acc + item.quantity * item.price, 0)
+    .toFixed(2);
+
+  const deliveryCost = +(subtotal * 0.05).toFixed(2);
+
+  const orderTotal = (subtotal + deliveryCost).toFixed(2);
+
   useEffect(() => {
+    document.title = 'Cart & Bookings';
     return () => {};
   }, []);
 
   return (
     <Layout childAsHero={true}>
-      <div className="flex flex-col justify-start items-start w-[975px] p-3 rounded-2xl bg-gray border-[10px] border-gray">
+      <section className="vstack justify-start items-center min-w-[375px] w-full max-w-[975px] p-3 rounded-2xl bg-gray border-[10px] border-gray">
+        <h1 className="text-3xl font-bold text-left  my-3 capitalize text-dark">
+          Cart & Bookings
+        </h1>
         <Tabs
           tabs={[
             {
@@ -39,8 +57,19 @@ function Bookings() {
           }}
         >
           {activeTab === 0 && (
-            <div className="flex flex-col justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
-              <div className="flex flex-col justify-start items-start w-full gap-2.5">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setActiveTab(1);
+                actions.update.orders(data.cart);
+                actions.remove.LocalStorage.removeCart();
+                actions.remove.cart();
+                const element = document.getElementsByTagName('header')[0];
+                element.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="vstack justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white"
+            >
+              <div className="vstack justify-start items-start w-full gap-2.5">
                 {data.cart?.map(({ name, quantity, price }, index) => (
                   <CartItem
                     key={index}
@@ -50,47 +79,106 @@ function Bookings() {
                   />
                 ))}
               </div>
-              <div className="flex flex-col justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
+              <div className="vstack justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
                 <p className="w-full text-1.5xl text-left text-primary">
                   Order summary
                 </p>
-                <div className="flex flex-col justify-start items-start w-full gap-2.5 p-2.5">
-                  <div className="flex justify-between items-start w-full h-16 relative border-t-0 border-r-0 border-b border-l-0 border-primary">
+                <div className="vstack justify-start items-start w-full gap-2.5 p-2.5">
+                  <div className="hstack justify-between items-start w-full h-16 relative border-t-0 border-r-0 border-b border-l-0 border-primary">
                     <p className="w-max text-xl text-left text-primary">
                       Subtotal
                     </p>
-                    <div className="flex justify-start items-start relative">
+                    <div className="hstack justify-start items-start relative">
                       <p className="w-xl text-xl text-left text-primary">$</p>
-                      <p className="text-xl text-left text-primary">---</p>
+                      <p className="text-xl text-left text-primary">
+                        {subtotal}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex justify-between items-start w-full h-16 relative border-t-0 border-r-0 border-b border-l-0 border-primary">
+                  <div className="hstack justify-between items-start w-full h-16 relative border-t-0 border-r-0 border-b border-l-0 border-primary">
                     <p className="w-max text-xl text-left text-primary">
                       Delivery
                     </p>
-                    <div className="flex justify-start items-start relative">
+                    <div className="hstack justify-start items-start relative">
                       <p className="w-xl text-xl text-left text-primary">$</p>
-                      <p className="text-xl text-left text-primary">37.95</p>
+                      <p className="text-xl text-left text-primary">
+                        {deliveryCost}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center w-full relative">
+                  <div className="hstack justify-between items-center w-full relative">
                     <p className="w-full text-1.5xl text-left text-primary">
                       Order total
                     </p>
-                    <div className="flex justify-start items-start relative">
+                    <div className="hstack justify-start items-start relative">
                       <p className="w-xl text-xl text-left text-pink">$</p>
-                      <p className="text-xl text-left text-pink">117.90</p>
+                      <p className="text-xl text-left text-pink">
+                        {orderTotal}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="flex justify-center items-center w-full relative overflow-hidden gap-2.5 py-[26px] rounded-bl-2xl rounded-br-2xl bg-primary">
-                <p className="text-2xl text-center text-surface">Checkout</p>
-              </div>
-            </div>
+              {orderTotal > 0 && (
+                <>
+                  <CardContainer title={'Payment'}>
+                    <div className={'wrap p-6 rounded-lg justify-between'}>
+                      <InputCard
+                        type={'text'}
+                        name={'name'}
+                        label={'Name'}
+                        placeholder={'Jhon Doe'}
+                        required
+                        minLength={3}
+                        errorText={'Please provide a valid name'}
+                        onChange={(_) => {}}
+                      />
+                      <InputCard
+                        type={'email'}
+                        name={'email'}
+                        required
+                        label={'Email'}
+                        placeholder={'jhondoe@example.com'}
+                        errorText={'Your entered an incorrect email'}
+                        onChange={(_) => {}}
+                      />
+                      <InputCard
+                        type={'tel'}
+                        name={'card_number'}
+                        required
+                        errorText={'Please provide a valid card number'}
+                        placeholder={'Card Number'}
+                        onChange={(_) => {}}
+                      />
+
+                      <InputCard
+                        type={'text'}
+                        name={'expiry'}
+                        placeholder={'Expiry'}
+                        required
+                        onChange={(_) => {}}
+                      />
+                      <InputCard
+                        type={'number'}
+                        name={'cvv'}
+                        required
+                        placeholder={'CVV'}
+                        onChange={(_) => {}}
+                      />
+                    </div>
+                  </CardContainer>
+                  <button
+                    type={'submit'}
+                    className="text-surface text-base font-bold hstack justify-center items-center w-full relative overflow-hidden gap-2.5 py-[26px] rounded-bl-2xl rounded-br-2xl bg-primary"
+                  >
+                    Checkout
+                  </button>
+                </>
+              )}
+            </form>
           )}
           {activeTab === 1 && (
-            <div className="flex flex-col justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
+            <div className="vstack justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
               {data.orders?.map(({ name, quantity, price }, index) => (
                 <OrderItem
                   key={index}
@@ -102,13 +190,13 @@ function Bookings() {
             </div>
           )}
           {activeTab === 2 && (
-            <div className="flex flex-col justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
+            <div className="vstack justify-start items-start w-full relative gap-3 px-3 py-6 rounded-lg bg-white">
               {data.bookings.map(({ occassion, date, time, guests }, index) => (
-                <div
+                <article
                   key={index}
-                  className="flex justify-between items-center  w-full h-36 relative px-6 py-3 rounded-2xl bg-gray"
+                  className="hstack justify-between items-center  w-full h-36 relative px-6 py-3 rounded-2xl bg-gray"
                 >
-                  <div className="flex flex-col justify-start items-start  w-[196px] relative gap-2">
+                  <div className="vstack justify-start items-start  w-[196px] relative gap-2">
                     <p className=" text-lg font-medium text-left text-primary">
                       Book For Ocassion
                     </p>
@@ -116,7 +204,7 @@ function Bookings() {
                       {occassion}
                     </p>
                   </div>
-                  <div className="flex flex-col justify-start items-center  w-[108px] relative gap-2">
+                  <div className="vstack justify-start items-center  w-[108px] relative gap-2">
                     <p className=" text-[21px] text-left text-primary">
                       {new Date(date).toLocaleDateString()}
                     </p>
@@ -124,7 +212,7 @@ function Bookings() {
                       {time}
                     </p>
                   </div>
-                  <div className="flex flex-col justify-start items-center  w-fit px-4 relative gap-2">
+                  <div className="vstack justify-start items-center  w-fit px-4 relative gap-2">
                     <p className=" text-[21px] text-left text-primary">
                       People
                     </p>
@@ -149,15 +237,15 @@ function Bookings() {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <div className="flex flex-col justify-center items-center self-stretch  relative px-3 rounded-tr-xl rounded-br-xl bg-primary">
+                  <div className="vstack justify-center items-center self-stretch  relative px-3 rounded-tr-xl rounded-br-xl bg-primary">
                     <p className=" text-xl text-center text-[#ddd]">Cancel</p>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           )}
         </Tabs>
-      </div>
+      </section>
     </Layout>
   );
 }

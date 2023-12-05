@@ -1,1 +1,22 @@
+:focus {
+  @apply outline-secondary outline-2;
+}
+.sectionContainer {
+  @apply w-full max-w-[1296px];
+}
 
+.hstack {
+  @apply flex;
+}
+
+.vstack {
+  @apply flex flex-col;
+}
+
+.wrap {
+  @apply flex flex-wrap;
+}
+
+.nowrap {
+  @apply flex flex-nowrap;
+}

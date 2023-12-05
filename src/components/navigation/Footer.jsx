@@ -5,21 +5,26 @@ import { Container } from '@app/layouts';
 
 export const Footer = (props) => {
   return (
-    <footer data-testid="_footer">
+    <footer
+      className={'p-sm vstack justify-start items-center gap-3xl hstack w-full'}
+      role={'contentinfo'}
+      data-testid="_footer"
+    >
       <Container>
-        <div className="flex justify-center items-center  relative p-3 rounded-lg bg-gray">
+        <div className="hstack justify-center items-center  relative p-3 rounded-lg bg-gray">
           <img
+            alt={'little lemon logo'}
             src="./assets/images/v-logo.png"
             className=" w-40 px-2 object-cover"
           />
         </div>
-        <div className="flex justify-center items-start  gap-16">
+        <div className="wrap md:nowrap justify-center items-start gap-4 md:gap-16 ">
           <Nav title={'Doormat Navigation'} items={navigation_links} />
           <Nav title={'Contact'} items={contact_navigations} />
 
-          <div className="flex flex-col justify-start items-start relative gap-3xl p-6 rounded-3xl">
+          <div className="vstack justify-start items-start relative gap-3xl p-6 rounded-3xl">
             <p className="text-base font-bold text-left text-primary"></p>
-            <div className="flex justify-center items-center h-px relative gap-6 py-3 rounded-xl bg-gray">
+            <div className="hstack justify-center items-center h-px relative gap-6 py-3 rounded-xl bg-gray">
               <svg
                 width={25}
                 height={25}

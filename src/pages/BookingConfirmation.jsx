@@ -1,19 +1,22 @@
 import { Layout } from '@app/layouts';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function BookingConfirmation() {
+  useEffect(() => {
+    document.title = 'Booking Confirmation';
+    return () => {};
+  }, []);
   return (
-    <div className="p-sm bg-surface flex-col  h-screen w-screen justify-center items-center gap-3xl flex">
-      <div className="flex flex-col justify-center items-center w-[425px] h-[425px]  overflow-hidden gap-6 rounded-xl bg-[#ddd]">
-        <div className="flex flex-col justify-center items-center self-stretch flex-grow relative gap-3">
+    <div className="p-sm bg-surface vstack  h-screen w-screen justify-center items-center gap-3xl hstack">
+      <div className="vstack justify-center items-center w-[425px] h-[425px]  overflow-hidden gap-6 rounded-xl bg-[#ddd]">
+        <div className="vstack justify-center items-center  relative gap-3">
           <svg
             width={85}
             height={85}
             viewBox="0 0 85 85"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="flex-grow-0 flex-shrink-0"
             preserveAspectRatio="none"
           >
             <path
@@ -21,19 +24,19 @@ function BookingConfirmation() {
               fill="black"
             />
           </svg>
-          <p className="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#495e57]">
+          <p className=" text-lg font-medium text-left text-[#495e57]">
             Thank You for Reservation..
           </p>
-          <p className="self-stretch flex-grow-0 flex-shrink-0 w-[425px] text-base text-center text-[#495e57]">
+          <p className="w-[425px] text-base text-center text-[#495e57]">
             You can browse for more items or you can see your Reservations in
             your profile.
           </p>
         </div>
         <Link
           to={'/'}
-          className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative px-6 py-4 rounded bg-[#495e57]"
+          className="hstack justify-center items-center relative px-6 py-4 rounded bg-[#495e57]"
         >
-          <span className="flex-grow-0 flex-shrink-0 text-lg font-medium text-left text-[#edefee]">
+          <span className="text-lg font-medium text-left text-[#edefee]">
             Back To Home
           </span>
         </Link>

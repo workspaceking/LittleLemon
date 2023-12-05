@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export const Arrow = ({ rotate = 0, negative = false, active = false }) => {
+export const Arrow = ({
+  direction = 'left',
+  negative = false,
+  active = false,
+}) => {
   return (
     <div
-      className={`flex flex-col justify-start items-start  relative gap-2.5 p-3 rounded-xl border-[3px] ${
+      className={`vstack justify-start items-start  relative gap-2.5 p-3 rounded-xl border-[3px] cursor-pointer hover:border-secondary ${
         active ? 'border-secondary' : 'border-surface'
       }`}
     >
@@ -14,7 +18,7 @@ export const Arrow = ({ rotate = 0, negative = false, active = false }) => {
         viewBox="0 0 16 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={`${negative ? '-' : ''}rotate-${rotate}`}
+        className={`${direction === 'left' ? 'rotate-0' : 'rotate-180'}`}
         preserveAspectRatio="none"
       >
         <path
@@ -27,7 +31,7 @@ export const Arrow = ({ rotate = 0, negative = false, active = false }) => {
 };
 
 Arrow.propTypes = {
-  rotate: PropTypes.oneOf([0, 90, 180]),
+  direction: PropTypes.oneOf(['left', 'right']),
   negative: PropTypes.bool,
   active: PropTypes.bool,
 };

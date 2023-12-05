@@ -4,17 +4,17 @@ import React from 'react';
 export const CardContainer = ({ title, padding = '2xl', ...props }) => {
   return (
     <div
-      className={`min-w-[375px] h-full flex flex-col w-full justify-start items-center  relative gap-lg p-${padding} rounded-xl bg-surface`}
+      className={`min-w-[375px] h-full vstack w-full justify-center items-center  relative gap-lg p-${padding} rounded-xl bg-surface`}
     >
       {title && (
-        <h1
+        <h2
           data-test-id="section_title"
-          className="text-sectiontitle py-4 font-bold text-left capitalize text-black"
+          className="text-cardtitle w-full py-4 font-bold text-start capitalize text-black"
         >
           {title}
-        </h1>
+        </h2>
       )}
-      <div className="flex flex-col justify-center items-center self-stretch   gap-xl">
+      <div className="vstack justify-start items-start w-[100%]  gap-xl">
         {props.children}
       </div>
     </div>

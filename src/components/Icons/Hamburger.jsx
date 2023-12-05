@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { IconContainer } from './IconContainer';
 import { useState } from 'react';
 
-export const Hamburger = ({ onToggle, ...props }) => {
+export const Hamburger = ({ onToggle, className, ...props }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <IconContainer
+    <div
       {...props}
       onClick={() => {
         onToggle(!open);
         setOpen(!open);
       }}
+      className={`${className} w-fit px-3 h-9 p-1.5 bg-surface rounded-lg justify-center items-center gap-3 hstack`}
     >
       {!open ? (
         <svg
@@ -47,7 +47,7 @@ export const Hamburger = ({ onToggle, ...props }) => {
           />
         </svg>
       )}
-    </IconContainer>
+    </div>
   );
 };
 

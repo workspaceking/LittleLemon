@@ -1,3 +1,3 @@
-import { WithLayout } from './hoc';
+import useSectionVisibility from './observers';
 
-export { WithLayout };
+export { useSectionVisibility };

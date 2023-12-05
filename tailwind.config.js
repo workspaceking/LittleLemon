@@ -2,7 +2,11 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '475px',
+      },
+    },
     spacing: {
       sm_vh: 720,
       sm_vw: 428,

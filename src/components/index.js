@@ -13,6 +13,9 @@ import { InputCard, SelectCard } from './form/Inputs';
 import { FindFoodHero } from './pages/home/FindFoodHero';
 import { Tabs } from './navigation/Tabs';
 import { CartItem, OrderItem } from './food/CartItem';
+import { Loader } from './async/Loader';
+import { Shimmer, DishShimmer, TestimonialShimmer } from './async/Shimmer';
+import Alert from './info/Alert';
 
 export {
   Navigation,
@@ -32,4 +35,9 @@ export {
   InputCard,
   SelectCard,
   Tabs,
+  Loader,
+  Shimmer,
+  DishShimmer,
+  TestimonialShimmer,
+  Alert,
 };
