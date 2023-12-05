@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { describe, test } from 'vitest';
 import App from './App';
 import { cleanup, render, screen, fireEvent } from '@testing-library/react';
-import { BookingForm } from './pages/BookingForm';
+import { BookingPage } from './pages/BookingPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { fetchAPI } from './api';
 import { DataProvider, LocalStorage } from './store';
@@ -65,7 +65,7 @@ describe('Booking Form', () => {
           <Routes>
             <Route
               path={'/bookingForm'}
-              element={<BookingForm onSubmit={mockSubmit} />}
+              element={<BookingPage onSubmit={mockSubmit} />}
             />
           </Routes>
         </BrowserRouter>

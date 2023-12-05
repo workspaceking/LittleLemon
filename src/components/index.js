@@ -16,6 +16,7 @@ import { CartItem, OrderItem } from './food/CartItem';
 import { Loader } from './async/Loader';
 import { Shimmer, DishShimmer, TestimonialShimmer } from './async/Shimmer';
 import Alert from './info/Alert';
+import { BookingForm } from './form/BookingForm';
 
 export {
   Navigation,
@@ -40,4 +41,5 @@ export {
   DishShimmer,
   TestimonialShimmer,
   Alert,
+  BookingForm,
 };
